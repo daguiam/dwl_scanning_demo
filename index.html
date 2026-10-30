@@ -7,30 +7,34 @@
 <title>DWL Small-Sample Crash</title>
 <style>
 :root{
-  --bg:#f6f5f1;--panel:#ffffff;--ink:#1d1f24;--muted:#6b6f78;--line:#d9d7d0;
-  --chuck:#9aa0a8;--sample:#3b6fd8;--sample-fill:rgba(59,111,216,.16);
-  --head:#b8892e;--head-fill:rgba(184,137,46,.18);--gauge:#0f9d76;
-  --write:#7b4fd6;--ok:#0f9d76;--warn:#d98a00;--bad:#d4372c;--air:#4fb3e8;
+  --bg:#F1F3F4;--panel:#FFFFFF;--ink:#1b1630;--muted:#808184;--line:#D9D9D9;
+  --brand:#493290;--brand-2:#6851A2;--brand-3:#A68EC3;--brand-mint:#8DF3DC;
+  --chuck:#7d8590;--chuck-2:#b9c0c8;--sample:#34465f;--sample-2:#5d7391;--resist:#ff5a36;
+  --head:#c8902a;--head-2:#f6d27a;--head-3:#8a5e12;--gauge:#12b886;--laser:#7a5cff;
+  --write:#e6398b;--ok:#16a34a;--warn:#f59e0b;--bad:#e11d48;--air:#0CC3D1;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#14161a;--panel:#1c1f25;--ink:#e9e9ea;--muted:#9a9ea8;--line:#2e323a;
-  --chuck:#5c626c;--sample:#6f9bff;--sample-fill:rgba(111,155,255,.18);
-  --head:#e0b45a;--head-fill:rgba(224,180,90,.16);--gauge:#3fd3a5;
-  --write:#a786ff;--ok:#3fd3a5;--warn:#f5b13d;--bad:#ff5a4e;--air:#6cc8ff;}}
+  --bg:#120e22;--panel:#1d1736;--ink:#F1F3F4;--muted:#A68EC3;--line:#342a5e;
+  --brand:#A68EC3;--brand-2:#8f78c9;--brand-3:#6851A2;--brand-mint:#8DF3DC;
+  --chuck:#5e656e;--chuck-2:#8b939c;--sample:#5d7391;--sample-2:#8aa0bd;--resist:#ff6e4d;
+  --head:#d9a03a;--head-2:#ffe08f;--head-3:#9a6b1a;--gauge:#2fd39a;--laser:#9d85ff;
+  --write:#ff5aa5;--ok:#34d399;--warn:#fbbf24;--bad:#fb4469;--air:#2fd6e3;}}
 :root[data-theme="dark"]{
-  --bg:#14161a;--panel:#1c1f25;--ink:#e9e9ea;--muted:#9a9ea8;--line:#2e323a;
-  --chuck:#5c626c;--sample:#6f9bff;--sample-fill:rgba(111,155,255,.18);
-  --head:#e0b45a;--head-fill:rgba(224,180,90,.16);--gauge:#3fd3a5;
-  --write:#a786ff;--ok:#3fd3a5;--warn:#f5b13d;--bad:#ff5a4e;--air:#6cc8ff;}
+  --bg:#120e22;--panel:#1d1736;--ink:#F1F3F4;--muted:#A68EC3;--line:#342a5e;
+  --brand:#A68EC3;--brand-2:#8f78c9;--brand-3:#6851A2;--brand-mint:#8DF3DC;
+  --chuck:#5e656e;--chuck-2:#8b939c;--sample:#5d7391;--sample-2:#8aa0bd;--resist:#ff6e4d;
+  --head:#d9a03a;--head-2:#ffe08f;--head-3:#9a6b1a;--gauge:#2fd39a;--laser:#9d85ff;
+  --write:#ff5aa5;--ok:#34d399;--warn:#fbbf24;--bad:#fb4469;--air:#2fd6e3;}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+body{accent-color:var(--brand-2);margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:1180px;margin:0 auto;padding:20px 16px 40px}
-h1{font-size:1.5rem;margin:0 0 4px}
+h1{font-size:1.6rem;margin:0 0 4px;color:var(--brand);letter-spacing:.02em;text-transform:uppercase}
+header.bar{height:6px;background:linear-gradient(90deg,#493290,#6851A2 55%,#A68EC3 80%,#8DF3DC)}
 .sub{color:var(--muted);margin:0 0 16px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media (max-width:860px){.grid{grid-template-columns:1fr}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
-.card h2{font-size:.95rem;margin:0 0 6px;color:var(--muted);font-weight:600}
+.card h2{font-size:.95rem;margin:0 0 6px;color:var(--brand);font-weight:700}
 canvas{width:100%;display:block;touch-action:none;border-radius:8px}
 #top{aspect-ratio:1/1;cursor:grab}
 #side{aspect-ratio:16/10}
@@ -41,7 +45,7 @@ canvas{width:100%;display:block;touch-action:none;border-radius:8px}
 .controls{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-top:12px}
 .controls label{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:.9rem}
 .controls output{color:var(--ink);min-width:4.5em;font-variant-numeric:tabular-nums}
-button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);margin-top:8px}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:6px}
@@ -52,6 +56,7 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
 </style>
 </head>
 <body>
+<header class="bar"></header>
 <main>
   <h1>Why small samples can crash the DWL write head</h1>
   <p class="sub">The pneumatic (air-gauge) autofocus sits a few mm away from the laser spot. If it leaves the sample, it reads the chuck instead and drives the head <b>down</b>, straight into the sample.</p>
@@ -67,8 +72,10 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
       <canvas id="top" aria-label="Top view of sample, write area and write head"></canvas>
       <div class="legend">
         <span><i style="background:var(--sample)"></i>Sample</span>
+        <span><i style="background:var(--resist)"></i>Resist</span>
         <span><i style="background:var(--write)"></i>Write area</span>
         <span><i style="background:var(--head)"></i>Nozzle body ⌀35 mm</span>
+        <span><i style="background:var(--laser)"></i>Laser 405 nm</span>
         <span><i style="background:var(--gauge)"></i>Air gauge ⌀4 mm</span>
         <span><i style="background:var(--warn)"></i>6 mm SOP edge margin</span>
       </div>
@@ -106,7 +113,7 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
 <script>
 "use strict";
 (() => {
-  const BODY_D = 35, GAUGE_D = 4, EDGE_ZONE = 6; // mm, EDGE_ZONE from SOP/CR/003 (write area >= 6 mm from edge)
+  const BODY_D = 35, GAUGE_D = 4, TIP_PAD = 1.5, EDGE_ZONE = 6; // mm, EDGE_ZONE from SOP/CR/003 (write area >= 6 mm from edge)
   const VIEW = 44;           // top view half-width [mm]
   const SPEED = 9;           // scan speed [mm/s] (visual)
   const IDLE_MS = 5000;      // resume animation after this idle time
@@ -171,8 +178,10 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
     }
     return inn / n;
   }
-  function bodyOverSample() {
-    const h = st.size / 2, R = BODY_D / 2;
+  // flat tip of the nozzle cone: carries the laser aperture and the air gauge
+  const tipR = () => st.off + GAUGE_D / 2 + TIP_PAD;
+  function tipOverSample() {
+    const h = st.size / 2, R = tipR();
     const cx = Math.max(st.sx - h, Math.min(st.hx, st.sx + h));
     const cy = Math.max(st.sy - h, Math.min(st.hy, st.sy + h));
     return Math.hypot(st.hx - cx, st.hy - cy) < R;
@@ -243,7 +252,7 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
     const THICK = 5.25; // sample thickness / working distance (~525 µm / 100 µm)
     st.zTarget = 1 - (1 - cov) * THICK;
     st.z += (st.zTarget - st.z) * Math.min(1, dt * 4);
-    if (st.z < 0 && bodyOverSample()) {
+    if (st.z < 0 && tipOverSample()) {
       st.z = 0; st.crash = 2.2;
       for (let i = 0; i < 28; i++) st.sparks.push({ a: Math.random() * Math.PI, v: 40 + Math.random() * 120, t: 0 });
     }
@@ -270,8 +279,9 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
     ctx.setLineDash([]);
     // sample
     const h = st.size / 2;
-    ctx.fillStyle = css("--sample-fill"); ctx.strokeStyle = css("--sample"); ctx.lineWidth = 2 * d;
-    ctx.fillRect(X(st.sx - h), Y(st.sy - h), st.size * k, st.size * k);
+    ctx.fillStyle = css("--resist"); ctx.globalAlpha = .22;
+    ctx.fillRect(X(st.sx - h), Y(st.sy - h), st.size * k, st.size * k); ctx.globalAlpha = 1;
+    ctx.strokeStyle = css("--sample"); ctx.lineWidth = 2.5 * d;
     ctx.strokeRect(X(st.sx - h), Y(st.sy - h), st.size * k, st.size * k);
     // edge-effect zone inside sample
     const zi = h - EDGE_ZONE;
@@ -286,11 +296,18 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
     ctx.strokeStyle = css("--gauge"); ctx.globalAlpha = .5; ctx.setLineDash([2 * d, 3 * d]);
     ctx.strokeRect(X(-wh + st.off - GAUGE_D / 2), Y(-wh - GAUGE_D / 2), (st.wa + GAUGE_D) * k, (st.wa + GAUGE_D) * k);
     ctx.setLineDash([]); ctx.globalAlpha = 1;
-    // nozzle body
+    // nozzle: outer body (cone) and flat tip, seen from above
+    const hg = ctx.createRadialGradient(X(st.hx), Y(st.hy), 0, X(st.hx), Y(st.hy), BODY_D / 2 * k);
+    hg.addColorStop(0, css("--head-2")); hg.addColorStop(1, css("--head"));
     circle(ctx, X(st.hx), Y(st.hy), BODY_D / 2 * k);
-    ctx.fillStyle = css("--head-fill"); ctx.fill(); ctx.strokeStyle = css("--head"); ctx.lineWidth = 2 * d; ctx.stroke();
+    ctx.globalAlpha = .38; ctx.fillStyle = hg; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.strokeStyle = css("--head-3"); ctx.lineWidth = 2 * d; ctx.stroke();
+    circle(ctx, X(st.hx), Y(st.hy), tipR() * k);
+    ctx.globalAlpha = .55; ctx.fillStyle = css("--head"); ctx.fill(); ctx.globalAlpha = 1;
+    ctx.strokeStyle = css("--head-3"); ctx.lineWidth = 1.5 * d; ctx.stroke();
     // laser spot
-    ctx.fillStyle = css("--write"); circle(ctx, X(st.hx), Y(st.hy), 3 * d); ctx.fill();
+    ctx.shadowColor = css("--laser"); ctx.shadowBlur = 10 * d;
+    ctx.fillStyle = css("--laser"); circle(ctx, X(st.hx), Y(st.hy), 3.5 * d); ctx.fill(); ctx.shadowBlur = 0;
     // gauge
     const g = gauge(), stat = status();
     circle(ctx, X(g.x), Y(g.y), GAUGE_D / 2 * k);
@@ -315,28 +332,47 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
     const chuckY = H * .82, sampleTop = chuckY - 6 * U;
     ctx.fillStyle = css("--panel"); ctx.fillRect(0, 0, W, H);
     // chuck
-    ctx.fillStyle = css("--chuck"); ctx.fillRect(0, chuckY, W, H - chuckY);
+    const cg = ctx.createLinearGradient(0, chuckY, 0, H);
+    cg.addColorStop(0, css("--chuck-2")); cg.addColorStop(1, css("--chuck"));
+    ctx.fillStyle = cg; ctx.fillRect(0, chuckY, W, H - chuckY);
     ctx.fillStyle = css("--panel"); ctx.font = `${11 * d}px system-ui`; ctx.fillText("chuck", 8 * d, chuckY + 16 * d);
     // sample cross-section at gauge y
     const h = st.size / 2, g = gauge();
     if (Math.abs(g.y - st.sy) <= h) {
-      ctx.fillStyle = css("--sample");
-      ctx.fillRect(X(st.sx - h), sampleTop, st.size * k, chuckY - sampleTop);
+      const sg = ctx.createLinearGradient(0, sampleTop, 0, chuckY);
+      sg.addColorStop(0, css("--sample-2")); sg.addColorStop(1, css("--sample"));
+      ctx.fillStyle = sg; ctx.fillRect(X(st.sx - h), sampleTop, st.size * k, chuckY - sampleTop);
+      ctx.fillStyle = css("--resist"); ctx.fillRect(X(st.sx - h), sampleTop, st.size * k, Math.max(2 * d, U * .35));
       ctx.fillStyle = css("--panel"); ctx.fillText("sample", Math.max(4 * d, X(st.sx - h) + 6 * d), chuckY - 6 * d);
     }
     // head
-    const headBottom = sampleTop - st.z * U, bodyH = H * .38;
-    ctx.fillStyle = css("--head-fill"); ctx.strokeStyle = css("--head"); ctx.lineWidth = 2 * d;
-    ctx.fillRect(X(st.hx - BODY_D / 2), headBottom - bodyH, BODY_D * k, bodyH);
-    ctx.strokeRect(X(st.hx - BODY_D / 2), headBottom - bodyH, BODY_D * k, bodyH);
-    ctx.fillStyle = css("--ink"); ctx.fillText("write head (nozzle ⌀35 mm)", X(st.hx - BODY_D / 2) + 6 * d, headBottom - bodyH + 16 * d);
-    // laser beam
-    ctx.strokeStyle = css("--write"); ctx.lineWidth = 2 * d;
-    ctx.beginPath(); ctx.moveTo(X(st.hx), headBottom - bodyH); ctx.lineTo(X(st.hx), headBottom + 2 * d); ctx.stroke();
-    // gauge channel + air jets
+    // nozzle profile: cylindrical body, cone, flat tip (tip carries laser aperture + air gauge)
+    const headBottom = sampleTop - st.z * U, bodyH = H * .36;
+    const top0 = headBottom - bodyH, coneTop = top0 + bodyH * .32, R = BODY_D / 2, r = tipR();
+    const hg = ctx.createLinearGradient(X(st.hx - R), 0, X(st.hx + R), 0);
+    hg.addColorStop(0, css("--head-3")); hg.addColorStop(.35, css("--head-2"));
+    hg.addColorStop(.6, css("--head")); hg.addColorStop(1, css("--head-3"));
+    ctx.beginPath();
+    ctx.moveTo(X(st.hx - R), top0); ctx.lineTo(X(st.hx + R), top0);
+    ctx.lineTo(X(st.hx + R), coneTop); ctx.lineTo(X(st.hx + r), headBottom);
+    ctx.lineTo(X(st.hx - r), headBottom); ctx.lineTo(X(st.hx - R), coneTop); ctx.closePath();
+    ctx.fillStyle = hg; ctx.fill();
+    ctx.strokeStyle = css("--head-3"); ctx.lineWidth = 1.5 * d; ctx.stroke();
+    ctx.fillStyle = "#1b1630"; ctx.font = `600 ${11 * d}px system-ui`;
+    ctx.fillStyle = css("--ink"); ctx.fillText("write head · nozzle ⌀35 mm", X(st.hx - R), top0 - 8 * d);
+    ctx.font = `${11 * d}px system-ui`;
+    // laser beam with glow, converging to the spot
+    ctx.shadowColor = css("--laser"); ctx.shadowBlur = 12 * d;
+    ctx.fillStyle = css("--laser"); ctx.globalAlpha = .85;
+    ctx.beginPath(); ctx.moveTo(X(st.hx) - 5 * d, top0); ctx.lineTo(X(st.hx) + 5 * d, top0);
+    ctx.lineTo(X(st.hx) + 1 * d, headBottom + st.z * U); ctx.lineTo(X(st.hx) - 1 * d, headBottom + st.z * U); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+    // air-gauge channel through the tip
     const stat = status();
+    ctx.fillStyle = "#1b1630";
+    ctx.fillRect(X(g.x - GAUGE_D / 4), coneTop, GAUGE_D / 2 * k, headBottom - coneTop);
     ctx.fillStyle = stat.color;
-    ctx.fillRect(X(g.x - GAUGE_D / 2), headBottom - 10 * d, GAUGE_D * k, 10 * d);
+    ctx.fillRect(X(g.x - GAUGE_D / 2), headBottom - 4 * d, GAUGE_D * k, 4 * d);
     const t = performance.now() / 1000, cov = gaugeCoverage(g);
     ctx.strokeStyle = css("--air"); ctx.lineWidth = 1.5 * d;
     for (let i = 0; i < 8; i++) {
