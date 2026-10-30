@@ -77,7 +77,7 @@ button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px s
         <span><i style="background:var(--head)"></i>Nozzle ⌀8 mm</span>
         <span><i style="background:var(--laser)"></i>Laser 405 nm</span>
         <span><i style="background:var(--gauge)"></i>Air gauge ⌀4 mm</span>
-        <span><i style="background:var(--warn)"></i>6 mm SOP edge margin</span>
+        <span><i style="background:var(--warn)"></i>8 mm edge margin</span>
       </div>
     </div>
     <div class="card">
@@ -105,15 +105,15 @@ button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px s
     <div class="card"><h2>1. How it focuses</h2><p>Air flows out of the 4 mm gauge opening. The back-pressure tells the system how far the head is from the surface, and it keeps that gap (working distance ≈50 µm) constant, also following wafer bow.</p></div>
     <div class="card"><h2>2. What goes wrong</h2><p>Past the sample edge the air escapes freely. The pressure drops, so the system thinks the head is <b>too high</b> and lowers it by roughly the sample thickness. A 725 µm sample against a 50 µm gap: the head hits the sample.</p></div>
     <div class="card"><h2>3. Why 1 inch is marginal</h2><p>On a 25.4 mm sample the edge is only 12.7 mm from the centre. Add the gauge offset, the write area and a 2-3 mm misplacement, and the gauge is off the sample.</p></div>
-    <div class="card"><h2>4. What to do</h2><p>Centre small samples carefully, keep the write area well inside, and keep the write area ≥ 6 mm from every edge (SOP/CR/003). Samples must be larger than 1 inch, square or round, and go on the 4-inch square holder.</p></div>
+    <div class="card"><h2>4. What to do</h2><p>Centre small samples carefully, keep the write area well inside, and keep the write area ≥ 8 mm from every edge. Samples must be larger than 1 inch, square or round, and go on the 4-inch square holder.</p></div>
   </div>
-  <p class="note">From SOP/CR/003 v7.0: write area ≥ 6 mm from the sample edge, minimum distance to plate edge 5 mm, samples larger than 1 inch. Nozzle ⌀8 mm, working distance 50 µm, sample thickness 725 µm and the gauge opening (≈4 mm) are the values used here. The gauge-to-laser offset is an assumption, so set it to the real value. Sample thickness and gap are exaggerated vertically.</p>
+  <p class="note">Write area ≥ 8 mm from the sample edge (tool responsible; SOP/CR/003 v7.0 states 6 mm). From the SOP: minimum distance to plate edge 5 mm, samples larger than 1 inch. Nozzle ⌀8 mm, working distance 50 µm, sample thickness 725 µm and the gauge opening (≈4 mm) are the values used here. The gauge-to-laser offset is an assumption, so set it to the real value. Sample thickness and gap are exaggerated vertically.</p>
 </main>
 
 <script>
 "use strict";
 (() => {
-  const BODY_D = 8, GAUGE_D = 4, EDGE_ZONE = 6; // mm, EDGE_ZONE from SOP/CR/003 (write area >= 6 mm from edge)
+  const BODY_D = 8, GAUGE_D = 4, EDGE_ZONE = 8; // mm, write area >= 8 mm from edge (tool responsible)
   const WORK_DIST = 50e-6, SAMPLE_T = 725e-6; // [m]
   const THICK = SAMPLE_T / WORK_DIST;           // sample thickness in working-distance units
   const VIEW = 44;           // top view half-width [mm]
@@ -125,11 +125,11 @@ button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px s
   const tctx = top.getContext("2d"), sctx = side.getContext("2d");
 
   const scenes = [
-    { title: "Scene 1 · 1-inch sample, well centred", miss: [0, 0], wa: 12,
-      text: "The 12 mm write area keeps the 6 mm SOP margin. The air gauge stays over the sample, so the gap is held, but notice how close the gauge gets to the edge." },
-    { title: "Scene 2 · Same design, sample placed 5.5 mm off-centre", miss: [-5.5, 1.5], wa: 12,
+    { title: "Scene 1 · 1-inch sample, well centred", miss: [0, 0], wa: 9,
+      text: "The 9 mm write area keeps the 8 mm margin. The air gauge stays over the sample, so the gap is held, but notice how close the gauge gets to the edge." },
+    { title: "Scene 2 · Same design, sample placed 7 mm off-centre", miss: [-7, 1.5], wa: 9,
       text: "A small placement error is enough. When the gauge passes the edge, autofocus drives the head down." },
-    { title: "Scene 3 · 2-inch sample, same misplacement", miss: [-5.5, 1.5], wa: 12, size: 50.8,
+    { title: "Scene 3 · 2-inch sample, same misplacement", miss: [-7, 1.5], wa: 9, size: 50.8,
       text: "With a bigger sample the gauge never gets close to an edge. This is why small samples need extra care." }
   ];
 
@@ -401,7 +401,7 @@ button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px s
     const g = gauge(), e = edgeDist(g), cov = gaugeCoverage(g);
     if (st.crash > 0) return { color: css("--bad"), msg: "Gauge saw the chuck, autofocus pushed the head down, and the head hit the sample edge.", lvl: "bad" };
     if (cov < .5) return { color: css("--bad"), msg: `Air gauge is OFF the sample (${e.toFixed(1)} mm). Pressure drops, so autofocus lowers the head.`, lvl: "bad" };
-    if (e < EDGE_ZONE) return { color: css("--warn"), msg: `Air gauge is ${e.toFixed(1)} mm from the edge, closer than the ${EDGE_ZONE} mm SOP margin. Focus may become unstable.`, lvl: "warn" };
+    if (e < EDGE_ZONE) return { color: css("--warn"), msg: `Air gauge is ${e.toFixed(1)} mm from the edge, closer than the ${EDGE_ZONE} mm margin. Focus may become unstable.`, lvl: "warn" };
     return { color: css("--ok"), msg: `Air gauge is ${e.toFixed(1)} mm from the edge. Focus is stable.`, lvl: "ok" };
   }
 
