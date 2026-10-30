@@ -45,7 +45,7 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);margin-top:8px}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:6px}
-.meter>div{height:100%;width:50%;background:var(--ok);transition:width .1s}
+.meter>div{height:100%;width:100%;background:var(--ok);transform-origin:left;transform:scaleX(.5);transition:transform .1s}
 .facts{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .facts .card p{margin:0;font-size:.92rem}
 .note{font-size:.8rem;color:var(--muted);margin-top:14px}
@@ -374,7 +374,7 @@ button,select{font:inherit;color:var(--ink);background:var(--bg);border:1px soli
     $("scene").textContent = st.mode === "auto" ? scenes[st.scene].title : "Your turn: drag the sample or the head (animation resumes after 5 s idle)";
     $("msg").textContent = (st.mode === "auto" && s.lvl === "ok" ? scenes[st.scene].text + " " : "") + s.msg;
     const cov = gaugeCoverage(gauge());
-    const pb = $("pbar"); pb.style.width = (15 + 70 * cov) + "%"; pb.style.background = s.color;
+    const pb = $("pbar"); pb.style.transform = `scaleX(${(15 + 70 * cov) / 100})`; pb.style.background = s.color;
     $("ztext").textContent = st.z >= .95
       ? "Gap held at the nominal value."
       : st.z > 0 ? `Autofocus is lowering the head, ${((1 - st.z) / 5.25 * 100).toFixed(0)} % of the sample thickness down.`
